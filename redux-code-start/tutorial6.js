@@ -41,7 +41,7 @@ const resetCounterAction = () => {
 const incrementCounterByValue = (value) => {
   return {
     type: INCREMENT_BY_VALUE,
-    payload: value
+    payload: value,
   };
 };
 
@@ -62,9 +62,9 @@ const counterReducer = (state = initialState, action) => {
       return {
         count: 0,
       };
-    case RESET:
+    case INCREMENT_BY_VALUE:
       return {
-        count: 0,
+        count: state.count + 5,
       };
 
     default:
@@ -83,4 +83,6 @@ store.dispatch(incrementCounterAction());
 store.dispatch(incrementCounterAction());
 store.dispatch(decrementCounterAction());
 store.dispatch(resetCounterAction());
-store.dispatch(incrementCounterAction());
+store.dispatch(incrementCounterByValue());
+store.dispatch(incrementCounterByValue());
+store.dispatch(incrementCounterByValue());
