@@ -3,12 +3,17 @@
 // middleware - redux-thunk
 // axios api
 
+const { createStore, applyMiddleware } = require("redux");
+const thunk = require("redux-thunk").default;
+const axios = require("axios");
+
 
 
 // constants
 const GET_TODOS_REQUEST = 'GET_TODOS_REQUEST';
 const GET_TODOS_SUCCESS = 'GET_TODOS_SUCCESS';
 const GET_TODOS_FAILED = 'GET_TODOS_FAILED';
+const API_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 
 // state
@@ -71,4 +76,28 @@ const todosReducer = (state = initialTodosState, action) => {
 };
 
 
+// fetching functionality
+const fetchData = () => {
+    return (dispatch) => {
+        dispatch(getTodosRequest());
+        axios.get(API_URL)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log(error.message);
+        });
+    }
+};
+
+
 // store
+const store = createStore(todosReducer, applyMiddleware(thunk));
+
+store.subscribe(() => {
+    console.log(store.getState());
+});
+
+
+// dispatch
+store.dispatch(fetchData());
