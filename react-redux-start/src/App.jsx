@@ -13,8 +13,3 @@ function App() {
 
 export default App
 
-// state - count : 0
-// actions - increment, decrement, reset
-// reducers - increment -> count => count + 1;
-// -> decrement -> count - 1;
-// -> reset -> count = 0;
